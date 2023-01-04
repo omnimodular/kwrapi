@@ -39,6 +39,6 @@ with kwarpi.session() as session:
 ### requirements.txt
 
 ```yaml
---find-links https://github.com/omnimodular/kwrapi/releases/download/v0.0.1/kwrapi-0.0.1.tar.gz
+--find-links https://github.com/omnimodular/kwrapi/releases/download/v0.0.1/kwrapi-0.0.1-py3-none-any.whl 
 kwrapi>=0.0.1
 ```
