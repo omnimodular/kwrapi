@@ -34,3 +34,11 @@ with kwarpi.session() as session:
     res = session.send(req) 
     print(res.json())
 ```
+
+
+### requirements.txt
+
+```yaml
+--find-links https://github.com/omnimodular/kwrapi/releases/download/v0.0.1/kwrapi-0.0.1.tar.gz
+kwrapi>=0.0.1
+```
