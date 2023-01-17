@@ -29,7 +29,7 @@ my_job = {
 Second, prepare a request and send it to K8s:
 
 ```python
-req = kwarpi.job(my_job)
+req = kwarpi.post_job(my_job)
 with kwarpi.session() as session:
     res = session.send(req) 
     print(res.json())
@@ -39,6 +39,6 @@ with kwarpi.session() as session:
 ### requirements.txt
 
 ```yaml
---find-links https://github.com/omnimodular/kwrapi/releases/download/v0.0.1/kwrapi-0.0.1-py3-none-any.whl 
-kwrapi>=0.0.1
+--find-links https://github.com/omnimodular/kwrapi/releases/download/v0.0.2/kwrapi-0.0.2-py3-none-any.whl 
+kwrapi>=0.0.2
 ```

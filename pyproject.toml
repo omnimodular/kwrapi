@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "kwrapi"
-version = "0.0.1"
+version = "0.0.2"
 description = "Kubernetes API wrapper"
 readme = "README.md"
 dependencies = [
