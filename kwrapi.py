@@ -52,7 +52,17 @@ def token():
         return _.read()
 
 
-def job(body):
+def get_job(name):
+    """
+    TODO: documentation
+    """
+    url = f"https://{host()}:{port()}/apis/batch/v1/namespaces/{namespace()}/job/{name}"
+    headers = {"Authorization": f"Bearer {token()}"}
+    req = Request("GET", url, headers=headers)
+    return req.prepare()
+
+
+def post_job(body):
     """
     TODO: documentation
     """
@@ -62,7 +72,17 @@ def job(body):
     return req.prepare()
 
 
-def deploy(body):
+def get_deployment(name):
+    """
+    TODO: documentation
+    """
+    url = f"https://{host()}:{port()}/apis/apps/v1/namespaces/{namespace()}/deployment/{name}"
+    headers = {"Authorization": f"Bearer {token()}"}
+    req = Request("GET", url, headers=headers)
+    return req.prepare()
+
+
+def post_deployment(body):
     """
     TODO: documentation
     """

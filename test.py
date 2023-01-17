@@ -21,7 +21,7 @@ my_job = {
     }
 }
 
-req = kwrapi.job(my_job)
+req = kwrapi.post_job(my_job)
 with kwrapi.session() as session:
     res = session.send(req)
     res.raise_for_status()
