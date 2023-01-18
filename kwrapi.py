@@ -20,9 +20,10 @@ def host() -> str:
     Returns the K8s hostname
     """
     if ENVIRONMENT == "production":
-        return os.environ["KUBERNETES_SERVICE_HOST"]
+        _ = os.environ["KUBERNETES_SERVICE_HOST"]
     else:
-        return os.environ.get("KWRAPI_HOST", "127.0.0.1")
+        _ = os.environ.get("KWRAPI_HOST", "127.0.0.1")
+    return _
 
 
 def port() -> int:
@@ -30,9 +31,10 @@ def port() -> int:
     Returns the Kubernetes API port
     """
     if ENVIRONMENT == "production":
-        return int(os.environ["KUBERNETES_SERVICE_PORT_HTTPS"])
+        _ = int(os.environ["KUBERNETES_SERVICE_PORT_HTTPS"])
     else:
-        return int(os.environ.get("KWRAPI_PORT", "8001"))
+        _ = int(os.environ.get("KWRAPI_PORT", "8001"))
+    return _
 
 
 def namespace() -> str:
@@ -81,6 +83,32 @@ def proto() -> str:
     return "https" if ENVIRONMENT == "production" else "http"
 
 
+def get_pod(name) -> PreparedRequest:
+    """
+    TODO: documentation
+    """
+    url = f"{proto()}://{host()}:{port()}/api/v1/namespaces/{namespace()}/pods/{name}"
+    if ENVIRONMENT == "production":
+        headers = {"Authorization": f"Bearer {token()}"}
+    else:
+        headers = None
+    req = Request("GET", url, headers=headers)
+    return req.prepare()
+
+
+def post_pod(body) -> PreparedRequest:
+    """
+    TODO: documentation
+    """
+    url = f"{proto()}://{host()}:{port()}/api/v1/namespaces/{namespace()}/pods"
+    if ENVIRONMENT == "production":
+        headers = {"Authorization": f"Bearer {token()}"}
+    else:
+        headers = None
+    req = Request("POST", url, json=body, headers=headers)
+    return req.prepare()
+
+
 def get_job(name) -> PreparedRequest:
     """
     TODO: documentation
@@ -104,6 +132,19 @@ def post_job(body) -> PreparedRequest:
     else:
         headers = None
     req = Request("POST", url, json=body, headers=headers)
+    return req.prepare()
+
+
+def get_deployments() -> PreparedRequest:
+    """
+    TODO: documentation
+    """
+    url = f"{proto()}://{host()}:{port()}/apis/apps/v1/namespaces/{namespace()}/deployments"
+    if ENVIRONMENT == "production":
+        headers = {"Authorization": f"Bearer {token()}"}
+    else:
+        headers = None
+    req = Request("GET", url, headers=headers)
     return req.prepare()
 
 
