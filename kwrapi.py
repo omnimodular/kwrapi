@@ -173,7 +173,7 @@ def get_deployment_scale(name):
     }
     ```
     """
-    url = f"{proto()}://{host()}:{port()}/apis/apps/v1/namespaces/{namespace()}/deployment/{name}/scale"
+    url = f"{proto()}://{host()}:{port()}/apis/apps/v1/namespaces/{namespace()}/deployments/{name}/scale"
     if ENVIRONMENT == "production":
         headers = {"Authorization": f"Bearer {token()}"}
     else:
@@ -186,7 +186,7 @@ def set_deployment_scale(name, scale):
     """
     TODO: documentation
     """
-    url = f"{proto()}://{host()}:{port()}/apis/apps/v1/namespaces/{namespace()}/deployment/{name}/scale"
+    url = f"{proto()}://{host()}:{port()}/apis/apps/v1/namespaces/{namespace()}/deployments/{name}/scale"
     if ENVIRONMENT == "production":
         headers = {"Authorization": f"Bearer {token()}"}
     else:
@@ -204,7 +204,7 @@ def get_deployment(name) -> PreparedRequest:
     """
     TODO: documentation
     """
-    url = f"{proto()}://{host()}:{port()}/apis/apps/v1/namespaces/{namespace()}/deployment/{name}"
+    url = f"{proto()}://{host()}:{port()}/apis/apps/v1/namespaces/{namespace()}/deployments/{name}"
     if ENVIRONMENT == "production":
         headers = {"Authorization": f"Bearer {token()}"}
     else:
