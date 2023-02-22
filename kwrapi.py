@@ -148,6 +148,58 @@ def get_deployments() -> PreparedRequest:
     return req.prepare()
 
 
+def get_deployment_scale(name):
+    """
+    TODO: documentation
+
+    ```
+    {
+      "apiVersion": "autoscaling/v1",
+      "kind": "Scale",
+      "metadata": {
+          "creationTimestamp": "2023-02-09T11:18:59Z",
+          "name": "my-app",
+          "namespace": "default",
+          "resourceVersion": "3489952",
+          "uid": "ac767d2a-7315-4972-9062-0808719adf03"
+      },
+      "spec": {
+          "replicas": 2
+      },
+      "status": {
+          "replicas": 2,
+          "selector": "app=my-app"
+      }
+    }
+    ```
+    """
+    url = f"{proto()}://{host()}:{port()}/apis/apps/v1/namespaces/{namespace()}/deployment/{name}/scale"
+    if ENVIRONMENT == "production":
+        headers = {"Authorization": f"Bearer {token()}"}
+    else:
+        headers = None
+    req = Request("GET", url, headers=headers)
+    return req.prepare()
+
+
+def set_deployment_scale(name, scale):
+    """
+    TODO: documentation
+    """
+    url = f"{proto()}://{host()}:{port()}/apis/apps/v1/namespaces/{namespace()}/deployment/{name}/scale"
+    if ENVIRONMENT == "production":
+        headers = {"Authorization": f"Bearer {token()}"}
+    else:
+        headers = None
+    body = {
+        "spec": {
+            "replicas": scale
+        }
+    }
+    req = Request("POST", url, headers=headers, json=body)
+    return req.prepare()
+
+
 def get_deployment(name) -> PreparedRequest:
     """
     TODO: documentation
