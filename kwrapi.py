@@ -213,7 +213,7 @@ def get_deployment(name) -> PreparedRequest:
     return req.prepare()
 
 
-def post_deployment(body) -> PreparedRequest:
+def create_deployment(body) -> PreparedRequest:
     """
     TODO: documentation
     """
@@ -223,6 +223,20 @@ def post_deployment(body) -> PreparedRequest:
     else:
         headers = None
     req = Request("POST", url, json=body, headers=headers)
+    return req.prepare()
+
+
+def update_deployment(body) -> PreparedRequest:
+    """
+    TODO: documentation
+    """
+    name = body["metadata"]["name"]
+    url = f"{proto()}://{host()}:{port()}/apis/apps/v1/namespaces/{namespace()}/deployments/{name}"
+    if ENVIRONMENT == "production":
+        headers = {"Authorization": f"Bearer {token()}"}
+    else:
+        headers = None
+    req = Request("PUT", url, json=body, headers=headers)
     return req.prepare()
 
 
